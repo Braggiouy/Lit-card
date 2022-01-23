@@ -88,12 +88,14 @@ export class LitCard extends LitElement {
       header: { type: String },
       footer: { type: String },
       img: { type: String },
+      action: { type: String },
     };
   }
 
   constructor() {
     super();
     this.title = 'Card title';
+    this.action = 'accept';
   }
 
   render() {
@@ -108,11 +110,21 @@ export class LitCard extends LitElement {
         <div class="card-body">
           <h5>${this.title}</h5>
           <slot></slot>
+          ${this.action
+            ? html`<button class="card-action" @click=${this.handleAction}>
+                ${this.action}
+              </button>`
+            : ''}
         </div>
         ${this.footer
           ? html`<div class="card-footer">${this.footer}</div>`
           : ''}
       </div>
     `;
+  }
+
+  handleAction() {
+    const event = new CustomEvent('card-action');
+    this.dispatchEvent(event);
   }
 }

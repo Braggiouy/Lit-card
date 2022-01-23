@@ -5,6 +5,7 @@
     <style>
       body {
         background: #fafafa;
+        --footer-align: center;
       }
     </style>
   </head>
@@ -21,7 +22,13 @@
       render(
         html`
           <div style="width : 18rem">
-            <lit-card footer="footer" img="${img}">
+            <lit-card
+              footer="footer"
+              img="${img}"
+              @card-action=${() => {
+                alert('Button pressed');
+              }}
+            >
               <p>Card content</p>
             </lit-card>
           </div>
